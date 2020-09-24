@@ -1,15 +1,18 @@
-/*
-GET height
+function century(year) {
+  let centuryNumber = Math.ceil(year / 100);
+  let centuryString = String(centuryNumber);
+  let lastTwo = centuryString[centuryString.length - 2] + centuryString[centuryString.length - 1];
 
-Loop hieght times
-print " ".repeat(i - hieght times) + "*".repeat(i + height times)
-
-*/
-
-function triangle(height) {
-  for (let i = 1; i <= height; i += 1) {
-    console.log(' '.repeat(height - i) + '*'.repeat(i));
+  if (lastTwo === '11' || lastTwo === '12' || lastTwo === '13') {
+    return centuryString + 'th';
+  }
+  
+  switch (centuryString[centuryString.length - 1]) {
+    case '1': return centuryString + 'st';
+    case '2': return centuryString + 'nd';
+    case '3': return centuryString + 'rd';
+    default: return centuryString + 'th';
   }
 }
 
-triangle(10);
+console.log(century(2000));
