@@ -1,5 +1,8 @@
-let munstersDescription = "the Munsters are CREEPY and Spooky.";
+let string = 'The Flinstones Rock!';
+let spaces = '';
 
-let newSentance = munstersDescription[0].toUpperCase() + munstersDescription.slice(1).toLowerCase();
-
-console.log(newSentance);
+for (let i = 0; i < 10; i += 1) {
+  
+  console.log(spaces + string);
+  spaces += " ";
+}
