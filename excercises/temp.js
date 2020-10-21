@@ -1,43 +1,74 @@
-function average(nums) {
-  let sum = nums.reduce((total, num) => total + num);
-
-  return sum / nums.length; //round the decimals???
+function toDate(string) {
+  return new Date(string + "T00:00:00");
 }
 
-function median(nums) {
-  nums.sort((a, b) => a - b);
+const TODAY = toDate("2018-08-05");
 
-  let median;
-  let length = nums.length;
-  if (length % 2 === 0) {
-    median = average([nums[(length / 2) - 1], nums[length / 2]]);
-  } else {
-    median = nums[Math.floor(length / 2)];
+function toString(date) {
+  return `${date.getFullYear()}-${addZero(String(date.getMonth() + 1))}-${addZero(String(date.getDate()))}`; //getyear is derecated, 
+}
+
+function addZero(string) {
+  if (string.length === 1) {
+    return `0${string}`;
+  }
+  return string;
+}
+
+function isInThePast(date) {
+  return date < TODAY;
+}
+
+function isWeekday(date) {
+  return date.getDay() >= 1 && date.getDay() <= 5;
+}
+
+let myCalendar = {
+  "2018-08-13": ["JS debugging exercises"],
+  "2018-08-14": ["Read 'Demystifying Rails'", "Settle health insurance"],
+  "2018-08-15": ["Read 'Demystifying Rails'"],
+  "2018-08-16": [],
+  "2018-08-30": ["Drone video project plan"],
+  "2018-09-10": ["Annual servicing of race bike"],
+  "2018-09-12": ["Study"],
+  "2018-11-02": ["Birthday Party"],
+  "2018-11-03": ["Birthday Party"]
+};
+
+let offeredClasses = {
+  "Back To The Future Movie Night": ["2018-07-30"],
+  "Web Security Fundamentals": ["2018-09-10", "2018-09-11"],
+  "Pranayama Yoga For Beginners": ["2018-08-30", "2018-08-31", "2018-09-01"],
+  "Mike's Hikes": ["2018-08-16"],
+  "Gordon Ramsey Master Class": ["2018-09-11", "2018-09-12"],
+  "Powerboating 101": ["2018-09-15", "2018-09-16"],
+  "Discover Parachuting": ["2018-11-02"]
+};
+
+function getCompatibleEvents(classes, calendar) {
+  function isAvailable(date) {
+    let dateStr = toString(date);
+    console.log(dateStr);
+    return !calendar[dateStr] || calendar[dateStr].length === 0;
   }
 
-  return median;
+  let compatibleClasses = [];
+
+  Object.keys(classes).forEach(className => {
+    let classDates = classes[className].map(toDate); //????
+
+    if (classDates.some(isInThePast)) {
+      return;
+    }
+
+    if (classDates.filter(isWeekday).every(isAvailable)) {
+      compatibleClasses.push(className);
+    }
+  });
+
+  return compatibleClasses;
 }
 
-// Tests
-
-let quarter1ExamScores = [89, 72, 100, 93, 64, 97, 82, 87, 90, 94];
-let quarter2ExamScores = [76, 91, 89, 90, 91, 67, 99, 82, 91, 87];
-let quarter3ExamScores = [99, 91, 88, 72, 76, 64, 94, 79, 86, 88];
-let quarter4ExamScores = [100, 94, 73, 88, 82, 91, 97, 99, 80, 84];
-
-// should all log 'true':
-console.log(average(quarter1ExamScores) === 86.8);
-console.log(average(quarter2ExamScores) === 86.3);
-console.log(average(quarter3ExamScores) === 83.7);
-console.log(average(quarter4ExamScores) === 88.8);
-
-console.log(median(quarter1ExamScores) === 89.5);
-console.log(median(quarter2ExamScores) === 89.5);
-console.log(median(quarter3ExamScores) === 87);
-console.log(median(quarter4ExamScores) === 89.5);
-
-console.log(median(quarter1ExamScores));
-console.log(median(quarter2ExamScores));
-console.log(median(quarter3ExamScores));
-console.log(median(quarter4ExamScores));
-
+console.log(getCompatibleEvents(offeredClasses, myCalendar));
+//console.log(toString("2018-08-05"));
+// expected: ["Mike's Hikes", "Powerboating 101"]
