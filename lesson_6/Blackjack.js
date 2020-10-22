@@ -1,6 +1,6 @@
 let readline = require("readline-sync");
 
-const NUMBER_OF_SUITS = 13;
+const NUMBER_OF_CARDS_IN_A_SUIT = 13;
 const FULL_DECK_SIZE = 52;
 const NUMBER_OF_CARDS_FIRST_DEALT = 2;
 const HIT_ONCE = 1;
@@ -9,7 +9,7 @@ const GAME_VALUE = 21;
 function initializeDeck() {
   let deck = [];
 
-  for (let index = 1; index <= NUMBER_OF_SUITS; index += 1) {
+  for (let index = 1; index <= NUMBER_OF_CARDS_IN_A_SUIT; index += 1) {
 
     let card = index;
 
@@ -23,10 +23,10 @@ function initializeDeck() {
       card = 'King';
     }
 
-    deck.push([String(card), 'H']);
-    deck.push([String(card), 'D']);
-    deck.push([String(card), 'S']);
-    deck.push([String(card), 'C']);
+    deck.push([String(card), 'Hearts']);
+    deck.push([String(card), 'Diamonds']);
+    deck.push([String(card), 'Spades']);
+    deck.push([String(card), 'Clubs']);
   }
 
   return deck;
@@ -46,6 +46,8 @@ function shuffleDeck(deck) {
 function hit(hand, deck, times) {
 
   let newCard = deck.pop();
+  
+  prompt('Hit!');
 
   for (let index = 0; index < times; index += 1) {
     hand.push(newCard);
@@ -54,12 +56,13 @@ function hit(hand, deck, times) {
 
 function displayHands(playerHand, dealerHand) {
 
-  let displayDealerCards = dealerHand.map(elem => elem[0]);
-  displayDealerCards[0] = 'unknown card';
+  let displayDealerCards = dealerHand.map(elem => `${elem[0]} of ${elem[1]}`);
+  displayDealerCards[0] = '???';
   prompt(`Dealer has: ${joinOr(displayDealerCards)}`);
 
-  let displayPlayerCards = playerHand.map(elem => elem[0]);
+  let displayPlayerCards = playerHand.map(elem => `${elem[0]} of ${elem[1]}`);
   prompt(`You have: ${joinOr(displayPlayerCards)}`);
+  prompt(`Your hand total is: ${scoreHand(playerHand)}`);
 }
 
 function joinOr(array, divider = ', ', statement = 'and') {
@@ -115,7 +118,7 @@ function playerTurn(playerHand, deck, dealerHand) {
     }
 
     prompt('hit or stay? (h/s)');
-    let answer = readline.question();
+    let answer = readline.question().toLowerCase();
     while (answer !== 'h' && answer !== 's') {
       prompt('please enter "h" or "s".');
       answer = readline.question();
@@ -132,6 +135,8 @@ function playerTurn(playerHand, deck, dealerHand) {
 }
 
 function dealerTurn(dealerHand, deck, playerHand) {
+  prompt('Dealer\'s turn:');
+  
   while (true) {
     let currentDealerScore = scoreHand(dealerHand);
 
@@ -142,7 +147,6 @@ function dealerTurn(dealerHand, deck, playerHand) {
       return currentDealerScore;
     } else {
       hit(dealerHand, deck, HIT_ONCE);
-      displayHands(playerHand, dealerHand);
     }
   }
 }
@@ -154,12 +158,12 @@ function playAgain() {
     prompt('please enter "y" or "n".');
     answer = readline.question().toLowerCase();
   }
-  if (answer !== 'y') return true;
-  return false;
+  return answer === 'y';
 }
 
 while (true) {
-
+  console.clear();
+  
   prompt('Welcome to Blackjack!');
 
   let deck = initializeDeck();
@@ -185,6 +189,6 @@ while (true) {
     }
   }
 
-  if (playAgain()) break;
+  if (!playAgain()) break;
 
 }
