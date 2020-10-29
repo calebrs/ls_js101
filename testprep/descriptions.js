@@ -35,8 +35,45 @@ line 20 starts a for loop that will loop as many times as the length of the arra
 if the current index value on arraySort does not equal the previous value of arraySort then the current value will be pushed to the newArray variable.
 After all iterations, newArray is returned to the function invocation. So in effect, this code takes two arrays, combines them, sorts them in ascending order and them removes any values that are duplicated.
 
+let greeting = 'Hello';
 
+while (true) {
+  greeting = 'Hi';
+  break;
+}
 
+console.log(greeting);
+
+On line 38, the global variable greeting is assigned the string value 'Hello'.
+Line 40 starts a while loop that executes lines 41 and 42 until an ending condition is met. As such, line 41 reassigns the variable greeting to the String value 'Hi'
+while line 42 ends the while loop that was started on line 40. Finally, line 45 calls the console.log function with the variable greeting's value as an argument, which
+will log to the console 'Hi'. This code demonstrates that when a global variable is declared it can be accessed within any block (it has global scope) in the program/document. Thus when the greeting
+was reassigned within the while loop, the global variable changed to 'Hi'.
+
+function doubleNumbers(numbers) {
+  let doubledNums = [];
+  let counter = 0;
+
+  while (counter < numbers.length) {
+    let currentNum = numbers[counter];
+    doubledNums.push(currentNum * 2);
+
+    counter += 1;
+  }
+
+  return doubledNums;
+}
+
+How does this code demonstrate the principle of transformation?
+On line 53 a new function called doubleNumbers is declared with the parameter number. 
+When the function is invoked lines 54 through 64 will execute. Line 54 and 55 declare new variables that will be used in the function 
+doubleNums is assigned to an empty array and counter is set to the number 0. A while loop begins on line 57 the runs the code on lines 58 and 61 over and over while
+the variable counmter is less than the length of the numbers variable/parameter, becasue the counter is incremented by one on line 61, the loop will run the same number of times as the length of the array.
+a new variable called currentNum is declared on line 58 and set equal to the current element of the numbers array (counter represents the index of the current element).
+next, line 59 calls the built-in push function to add currentNum times two to the doubledNums. As previously mentioned, line 61 increments the counter variable by one allowing the 
+the loop to run over all the elements in the array. lastly on line 64 the value of the the variable doubledNums is returned to whereever this funtion is invoked. So, in effect this function
+doubles each number of the input array, places it in a new array, then returns that array. This demonstrates transformation becuase each element of the input array is altered. The input
+array will have the same length as the output array.
 
 
 
