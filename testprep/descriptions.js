@@ -75,7 +75,85 @@ the loop to run over all the elements in the array. lastly on line 64 the value 
 doubles each number of the input array, places it in a new array, then returns that array. This demonstrates transformation becuase each element of the input array is altered. The input
 array will have the same length as the output array.
 
+What will the code output?
+
+let arr1 = [{ first: "value1" }, { second: "value2" }, 3, 4, 5];
+let arr2 = arr1.slice();
+arr2[0].first = 42;
+console.log(arr1);
+
+the code on line 80 declares a new variable arr1 and sets it equal to an array with 5 elements, two of which are objects and three of which are numbers
+the next line of code creates a shallow copy of arr1 using the slice method and sets it equal to the new variable arr2.
+line 82 then reassigns the 'first' property of the first element in arr2 to the number 42.
+line 83 will then log the array [{ first: 42 }, { second: "value2" }, 3, 4, 5] to the console. 
+Because arr2 is only a shallow copy, nested objects still are pointers, meaning that the object in arr1 is the same object as the one in arr2. The reassignment will chnage the value 
+in both arrays.
+
+what does the following code output?
+
+let nanArray = [NaN];
+
+console.log(nanArray[0] === NaN);
+
+Line 96 will log false to the console. nanArray[0]'s value is NaN. The expression evaluates to false becuase NaN is not equal to NaN.
+
+what happens if we modify a after placing it in arr?
+
+let a = [1, 3];
+let b = [2];
+let arr = [a, b];
+
+arr;
+
+a[1] = 5;
+arr;
+
+106 returns the value of the variable arr, which is an array: [[1, 3], 2]
+on line 108, the value at index 1 in array 'a' is reassigned the value 5.
+the reuslt of the second arr call will be [[1, 5], 2]. even though the arr is a new variable, the array that is inside of arr still acts as a reference/pointer.
+meaning that arr[0] is equal to and points to the same array as the variable 'a'.
+
+What is the result of the following call?
+
+function rps(fist1, fist2) {
+  if (fist1 === "rock") {
+    return fist2 === "paper" ? "paper" : "rock";
+  } else if (fist1 === "paper") {
+    return fist2 === "scissors" ? "scissors" : "paper";
+  } else {
+    return fist2 === "rock" ? "rock" : "scissors";
+  }
+}
+
+console.log(rps("Paper", "rock"));
+
+The two most inner calls resolve to "paper" and "Rock" which means the next invokatoin of rps resolves to
+"Paper". Lastly the final rps invocation resolves to "Paper". The inner most invocations will get evaluated first so that that the outer invocations can have a
+meaningful value it can use. 
+
+What is the return value of map in the following code? why?
+
+['ant', 'bear'].map(elem => {
+  if (elem.length > 3) {
+    return elem;
+  }
+});
+
+the map method gets called on the array with a callback that returns the current element in the array if the length of the string element is longer than 3 characters.
+The first iteration of the callback will return undefined because no else condition is specified in the callback, and the second iteration will return 'bear'. .map
+creates a new array with the return values of its callback resulting in the array: [Undefinded, 'bear']
 
 
+What is the callback's return value in the following code? Also, what is the return value of every in this code?
+
+[1, 2, 3].every(num => {
+  return num = num * 2;
+});
+
+the method every returns either true or false, based on the return values of its callback function. If all the return values of the callback are true the call will be true.
+If any of the values evaluate to valse, every will be false.
+In this case the callback iterates through the array 
+and for each iteration reassigns 'num' to num * 2. because 'every' is looking for boolean values, and each iteration returns a truthy value (which evaluates to true),
+'every' will evaluate to true.
 
 */

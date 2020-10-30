@@ -17,11 +17,63 @@ looping mechanisms for each sentance
 looping mechanism for each word in a sentance
 
 Algorithm:
+build array of sentances -
+  create empty sentance array
+  create start index set to 0
+  start loop that ends when the start index is greater than or equal to the length of the paragraph
+  create end index, set to the index of the first punctuation
+  slice the paragraph from the start index to the end index
+  push the sliced sentace to the sentance array
+  set the start index equal to the end index
+
+create longest sentance variable
+split the sentance array into words
+iterate through the sentance array
+  compare the current sentance's length with the longest sentance variable. If it's bigger, then set it equal to the longest sentance variable.
+
+join the words back into a sentance
+return the longest sentance
 
 */
 
 function longestSentence(paragraph) {
+  let sentenceArray = getSentanceArray(paragraph);
+  let longestSentenceLength = 0;
+  let longestSentence = '';
+
+  sentenceArray.forEach(sentence => {
+    let arrayOfWordsLength = sentence.split(' ').length;
+    if (arrayOfWordsLength > longestSentenceLength) {
+      console.log(longestSentenceLength);
+      longestSentence = sentence;
+      longestSentenceLength = arrayOfWordsLength;
+    }
+  });
+
+  return longestSentence;
+}
+
+function getSentanceArray(paragraph) {
+  let sentanceArray = [];
+  let startIndex = 0;
   
+  while (startIndex <= paragraph.length) {
+    let endIndex = getEndIndex(paragraph, startIndex) + 1;
+    let sentance = paragraph.slice(startIndex, endIndex);
+
+    sentanceArray.push(sentance);
+    startIndex = endIndex + 1;
+  }
+  
+  return sentanceArray;
+}
+
+function getEndIndex(paragraph, startIndex) {
+  let punctuationIndeces = [paragraph.indexOf('.', startIndex), paragraph.indexOf('?', startIndex), paragraph.indexOf('!', startIndex)];
+  let punctuationIndecesSortedFiltered = punctuationIndeces.filter(num => num !== -1).sort();
+  let endIndex = punctuationIndecesSortedFiltered[0];
+
+  return endIndex;
 }
 
 let longText =
@@ -51,6 +103,8 @@ let longerText = longText +
   'and that government of the people, by the people, for the people, ' +
   'shall not perish from the earth.';
 
+
+
 console.log(longestSentence(longText));
 // Four score and seven years ago our fathers brought forth on this continent a new nation, conceived in liberty, and dedicated to the proposition that all men are created equal.
 //
@@ -66,7 +120,9 @@ console.log(longestSentence("Where do you think you're going? What's up, Doc?"))
 //
 // The longest sentence has 6 words.
 
-console.log(longestSentence("To be or not to be! Is that the question?"));
+console.log(longestSentence("Is that the question? To be or not to be!"));
 // To be or not to be!
 //
 // The longest sentence has 6 words.
+
+//console.log(getSentanceArray(longText));
