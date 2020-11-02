@@ -35,6 +35,12 @@ line 20 starts a for loop that will loop as many times as the length of the arra
 if the current index value on arraySort does not equal the previous value of arraySort then the current value will be pushed to the newArray variable.
 After all iterations, newArray is returned to the function invocation. So in effect, this code takes two arrays, combines them, sorts them in ascending order and them removes any values that are duplicated.
 
+What is the return value and why?
+
+[1, 2, 3].filter(num => 'hi');
+
+The return value of this statment is '[1,2,3]'. This is becuase when the filter function is called on the array [1,2,3] it executes the callback fuction which checks whether or not the code after the arraw (=>) evaluates to true or false.
+because 'hi' is truthy, the callback function will always evaluate to true meaning that each element in the array will go into the reutrn array of the filter function invokation.
 
 
 
