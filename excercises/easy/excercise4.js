@@ -7,3 +7,10 @@ function shortLongShort(str1, str2) {
 }
 
 console.log(shortLongShort('', 'xyz'));
+
+/*
+
+
+
+
+*/

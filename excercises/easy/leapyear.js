@@ -18,4 +18,11 @@ console.log(isLeapYear(2016),      // true
             isLeapYear(1700),      // false
             isLeapYear(1),         // false
             isLeapYear(100),       // false
-            isLeapYear(400)); 
+            isLeapYear(400));
+            
+/*
+What does isLeapYear output?
+
+
+
+*/
