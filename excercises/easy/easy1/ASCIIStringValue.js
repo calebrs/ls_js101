@@ -23,7 +23,7 @@ return the running total
 
 */
 function asciiValue(string) {
-  return string.split('').reduce((accum, char, indx) => accum + char.charCodeAt(0), 0);
+  return string.split('').reduce((accum, char) => accum + char.charCodeAt(0), 0);
 }
 
 console.log(asciiValue('Four score'));         // 984
