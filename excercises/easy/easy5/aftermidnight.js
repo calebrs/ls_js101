@@ -53,7 +53,6 @@ function timeOfDay(minutes) {
   }
 
   let timeOfDay = minutes + startingMinute;
-  //console.log(convertMinutesToHours(timeOfDay));
   return convertMinutesToHours(timeOfDay);
 }
 
