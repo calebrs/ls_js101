@@ -18,7 +18,9 @@ iterate through the first array
 function multiplyAllPairs(arr1, arr2) {
   let newArray = [];
 
-  arr1.forEach(num1 => arr2.forEach(num2 => newArray.push(num1 * num2)));
+  arr1.forEach(num1 =>
+      arr2.forEach(num2 =>
+          newArray.push(num1 * num2)));
 
   return newArray.sort((a, b) => a - b);
 }
