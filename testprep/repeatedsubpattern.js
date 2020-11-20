@@ -17,6 +17,10 @@ Algorithm:
   start iterating through the string
   create the stringcheck set to empty string
    on each element:
+   a => a, aa, aaa
+   ab => ab, abab
+   aba
+   abab
    declare current substring: from 0 index to current index + 1;
     while the check string is shorter or equal to the input strings length
       if the check equals the input return true

@@ -21,11 +21,12 @@ const PUNCUATION = ['.', ',', '!', ':', ';', '?'];
 function searchWord(word, text) {
   return text.split(' ')
     .reduce((total, elem) => {
-      
+      /*
       if (elem.endsWith(...PUNCUATION)) {
         elem = word.slice(0, -1);
         console.log(elem);
       }
+      */
       
       if (elem.toLowerCase() === word) {
         return total + 1;
