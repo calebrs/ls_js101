@@ -46,7 +46,7 @@ function shuffleDeck(deck) {
 function hit(hand, deck, times) {
 
   let newCard = deck.pop();
-  
+
   prompt('Hit!');
 
   for (let index = 0; index < times; index += 1) {
@@ -134,9 +134,9 @@ function playerTurn(playerHand, deck, dealerHand) {
   }
 }
 
-function dealerTurn(dealerHand, deck, playerHand) {
+function dealerTurn(dealerHand, deck) {
   prompt('Dealer\'s turn:');
-  
+
   while (true) {
     let currentDealerScore = scoreHand(dealerHand);
 
@@ -163,7 +163,7 @@ function playAgain() {
 
 while (true) {
   console.clear();
-  
+
   prompt('Welcome to Blackjack!');
 
   let deck = initializeDeck();
